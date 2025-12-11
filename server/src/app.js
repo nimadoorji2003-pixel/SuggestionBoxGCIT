@@ -20,7 +20,7 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: function (origin, callback) {
-      // allow requests with no origin (like mobile apps, curl, Postman)
+      // allow requests with no origin (Postman, curl, etc.)
       if (!origin) return callback(null, true);
 
       if (allowedOrigins.includes(origin)) {
@@ -35,8 +35,8 @@ app.use(
   })
 );
 
-// Handle preflight for all routes
-app.options("*", cors());
+// ❌ REMOVE this line (it caused the PathError in Express 5)
+// app.options("*", cors());
 
 // ---------------- GENERAL MIDDLEWARES ----------------
 app.use(helmet());
@@ -44,8 +44,6 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 // ---------------- HEALTH / ROOT ROUTES ----------------
-
-// Root route (useful for Render healthcheck & quick sanity check)
 app.get("/", (req, res) => {
   res.json({
     status: "ok",
@@ -54,7 +52,6 @@ app.get("/", (req, res) => {
   });
 });
 
-// API healthcheck route
 app.get("/api/health", (req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
@@ -65,7 +62,7 @@ app.use("/api/feedback", feedbackRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/categories", categoryRoutes);
 
-// ---------------- ERROR HANDLERS (MUST BE LAST) ----------------
+// ---------------- ERROR HANDLERS ----------------
 app.use(notFound);
 app.use(errorHandler);
 
