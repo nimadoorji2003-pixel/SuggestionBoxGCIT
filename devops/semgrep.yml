@@ -1,0 +1,7 @@
+rules:
+  - id: generic-warning
+    patterns:
+      - pattern: console.log($X)
+    message: "Remove console.log in production code"
+    languages: [javascript, typescript]
+    severity: INFO

@@ -1,0 +1,21 @@
+# Local history / editor stuff
+.history/
+
+# Node modules
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Env files (secrets)
+*.env
+server/.env
+client/.env
+
+# Logs
+*.log
+logs/
+
+# Build output
+dist/
+client/dist/
+server/dist/
