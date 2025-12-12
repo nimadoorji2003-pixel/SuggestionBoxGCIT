@@ -3,7 +3,7 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    jest: true,
+    jest: true, // for testing-library / vitest DOM stuff
   },
   extends: [
     "eslint:recommended",
