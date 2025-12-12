@@ -42,7 +42,7 @@ jobs:
       # ----- Frontend (client) -----
       - name: Install frontend dependencies
         working-directory: client
-        run: npm ci
+        run: npm install
 
       - name: Lint frontend
         working-directory: client
@@ -91,7 +91,7 @@ jobs:
 
       - name: Install frontend deps
         working-directory: client
-        run: npm ci
+        run: npm install
 
       - name: npm audit backend
         working-directory: server
