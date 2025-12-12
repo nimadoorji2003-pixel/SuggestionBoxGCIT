@@ -5,14 +5,17 @@ const createAdminIfNotExists = async () => {
   const adminPassword = process.env.DEFAULT_ADMIN_PASSWORD;
 
   if (!adminEmail || !adminPassword) {
-    console.log("⚠️ No default admin credentials provided. Skipping auto-create.");
+    // Use warn instead of console.log for SAST compliance
+    console.warn(
+      "No default admin credentials provided. Skipping auto-create."
+    );
     return;
   }
 
   const existingAdmin = await User.findOne({ email: adminEmail.toLowerCase() });
 
   if (existingAdmin) {
-    console.log("✔ Admin already exists. Skipping creation.");
+    console.info("Admin already exists. Skipping creation.");
     return;
   }
 
@@ -23,7 +26,7 @@ const createAdminIfNotExists = async () => {
     role: "admin",
   });
 
-  console.log(`🚀 Super Admin created: ${adminEmail}`);
+  console.info(`Super Admin created: ${adminEmail}`);
 };
 
 module.exports = createAdminIfNotExists;
